@@ -9,3 +9,13 @@ export const client = new Client({
 export const getGames = client.createRequest()({
   endpoint: "",
 });
+
+export function getGame(page = 1) {
+  return {
+    game: new Client({
+      url: `https://api.rawg.io/api/games/${page}?key=${API_Key}`,
+    }).createRequest()({
+      endpoint: "",
+    }),
+  };
+}
