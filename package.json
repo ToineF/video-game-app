@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hyper-fetch/core": "^5.4.1",
+    "@hyper-fetch/react": "^5.4.1",
     "autoprefixer": "10.4.14",
+    "cors": "^2.8.5",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.7",
     "next": "13.4.7",
