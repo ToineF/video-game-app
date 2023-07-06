@@ -1,5 +1,4 @@
-import { useFetch } from "@hyper-fetch/react";
-import { getGames, getGamesPage } from "@/assets/libs/httpClient";
+import { useFetchGameByID } from "@/assets/hooks/useFetch";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -9,7 +8,6 @@ export default function RandomButton({ text = "Random Game" }) {
   }
   const [gamesData, setGamesData] = useState(null);
   const [pageData, setPageData] = useState(null);
-  const [request_switch, setRequestSwitch] = useState(0);
 
   async function pageFetchData() {
     const gamesNumber = gamesData.count;
@@ -32,9 +30,9 @@ export default function RandomButton({ text = "Random Game" }) {
       const games_data = await games_res.json();
       setGamesData(games_data);
     }
-    fetchData();
-    pageFetchData();
-  }, []);
+    if (gamesData === null) fetchData();
+    else pageFetchData();
+  }, [gamesData]);
 
   return (
     <button

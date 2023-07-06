@@ -21,3 +21,6 @@ const fetchRessource = (param) => (queries) =>
 export const useFetchGames = fetchRessource("/games");
 export const useFetchGenres = fetchRessource("/genres");
 export const useFetchTags = fetchRessource("/tags");
+
+export const useFetchGameByID = (id) => fetchRessource(`/games/${id}`);
+// Current syntax:   const { data, loading, error } = useFetchGameByID(id)();

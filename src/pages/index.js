@@ -1,19 +1,18 @@
-import { useFetch } from "@hyper-fetch/react";
-import { getGames } from "@/assets/libs/httpClient";
 import RandomButton from "@/components/UI/RandomButton";
+import { useFetchGames } from "@/assets/hooks/useFetch";
 
 export default function Home() {
-  const { data, loading, error } = useFetch(getGames);
+  const { data, loading, error } = useFetchGames();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start gap-2 p-24">
-      <p>
-        {data !== null
-          ? !loading
-            ? JSON.stringify(data.count) + " games"
-            : "loading"
-          : ""}{" "}
-      </p>
+      <div>
+        {console.log(data)}
+        {loading ? <p>Fetching data...</p> : null}
+
+        {error ? <p>Error ...</p> : null}
+        {data !== null ? JSON.stringify(data.count) + " games" : ""}
+      </div>
       <RandomButton />
     </main>
   );

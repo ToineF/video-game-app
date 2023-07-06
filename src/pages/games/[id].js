@@ -1,14 +1,12 @@
 import { useRouter } from "next/router";
-import { useFetch } from "@hyper-fetch/react";
-import { getGame, getGames } from "@/assets/libs/httpClient";
+import Image from "next/image";
+import { useFetchGameByID } from "@/assets/hooks/useFetch";
 
 export default function GameID() {
   const { asPath } = useRouter();
 
   const currentURL = asPath.split("/").slice(-1)[0].replaceAll("%20", " ");
-  const target_page = getGame(currentURL).game;
-  const { data, loading, error } = useFetch(target_page);
-
+  const { data, loading, error } = useFetchGameByID(currentURL)();
   return (
     <div className="flex min-h-screen flex-col items-center justify-start gap-8 p-24">
       {loading || data === null ? <p>Fetching data...</p> : null}
@@ -17,7 +15,19 @@ export default function GameID() {
 
       {data ? (
         <div key={data.id} className="flex flex-col text-center gap-2">
-          <div className="font-bold">{data.name}</div>
+          <div className="font-bold text-lg">{data.name}</div>
+          <div className="flex justify-center">
+            {data.background_image !== null ? (
+              <Image
+                src={data.background_image}
+                alt="Main Picture of the game"
+                width={500}
+                height={250}
+              ></Image>
+            ) : (
+              ""
+            )}
+          </div>
           <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
         </div>
       ) : null}

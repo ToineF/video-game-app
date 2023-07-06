@@ -12,18 +12,18 @@ export const getGames = client.createRequest()({
   endpoint: urlEnd,
 });
 
-export function getGame(page = 1) {
-  return {
-    game: client.createRequest()({
-      endpoint: `/${page}${urlEnd}`,
-    }),
-  };
-}
+// export function getGame(page = 1) {
+//   return {
+//     game: client.createRequest()({
+//       endpoint: `/${page}${urlEnd}`,
+//     }),
+//   };
+// }
 
-export function getGamesPage(id = 1) {
-  return {
-    page: client.createRequest()({
-      endpoint: `${urlEnd}&page=${id}`,
-    }),
-  };
-}
+// export function getGamesPage(id = 1) {
+//   return {
+//     page: client.createRequest()({
+//       endpoint: `${urlEnd}&page=${id}`,
+//     }),
+//   };
+// }

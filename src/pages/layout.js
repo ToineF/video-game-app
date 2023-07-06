@@ -9,6 +9,7 @@ export default function Layout({ children }) {
         <RandomButton />
       </div>
       <div>{children}</div>
+      <footer>Data from RAWG.io API</footer>
     </main>
   );
 }

@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "media.rawg.io",
+        port: "",
+        pathname: "/media/**",
+      },
+    ],
+  },
   reactStrictMode: true,
 };
-
-module.exports = nextConfig;
