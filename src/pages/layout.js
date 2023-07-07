@@ -9,7 +9,7 @@ export default function Layout({ children }) {
         <RandomButton />
       </div>
       <div>{children}</div>
-      <footer>Data from RAWG.io API</footer>
+      <footer className="flex justify-center p-5">Data from RAWG.io API</footer>
     </main>
   );
 }

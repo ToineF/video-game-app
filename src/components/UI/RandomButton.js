@@ -1,11 +1,9 @@
-import { useFetchGameByID } from "@/assets/hooks/useFetch";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { UseFetchRandomGame } from "@/assets/hooks/useFetch";
+import { RandomInt } from "@/assets/libs/UtilityFunctions";
 
 export default function RandomButton({ text = "Random Game" }) {
-  function RandomInt(min, max) {
-    return Math.floor(min + Math.random() * (max - min));
-  }
   const [gamesData, setGamesData] = useState(null);
   const [pageData, setPageData] = useState(null);
 
