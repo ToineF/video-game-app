@@ -1,5 +1,6 @@
 import RandomButton from "@/components/UI/RandomButton";
 import { useFetchGames } from "@/assets/hooks/useFetch";
+import Accordion from "@/components/UI/Accordion";
 
 export default function Home() {
   const { data, loading, error } = useFetchGames();
@@ -14,6 +15,7 @@ export default function Home() {
         {data !== null ? JSON.stringify(data.count) + " games" : ""}
       </div>
       <RandomButton />
+      <Accordion />
     </main>
   );
 }
