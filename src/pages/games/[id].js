@@ -21,12 +21,19 @@ export default function GameID() {
           <div>
             {data.developers !== null ? (
               <p>
-                Developped by
-                {data.developers.map((developer, index) => {
-                  let name = " " + developer.name;
-                  if (index + 1 < data.developers.length) name += ",";
-                  return name;
-                })}
+                {data.developers !== null ? (
+                  <p>
+                    {" "}
+                    Developped by
+                    {data.developers.map((developer, index) => {
+                      let name = " " + developer.name;
+                      if (index + 1 < data.developers.length) name += ",";
+                      return name;
+                    })}
+                  </p>
+                ) : (
+                  ""
+                )}
               </p>
             ) : (
               ""
