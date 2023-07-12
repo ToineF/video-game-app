@@ -1,21 +1,24 @@
 import RandomButton from "@/components/UI/RandomButton";
-import { useFetchGames } from "@/assets/hooks/useFetch";
+import { useQuery } from "@tanstack/react-query";
+import { fetchGames } from "@/assets/hooks/useFetch";
 import Accordion from "@/components/UI/Accordion";
 
 export default function Home() {
-  const { data, loading, error } = useFetchGames();
+  const { status, data } = useQuery({
+    queryKey: ["games"],
+    queryFn: fetchGames,
+  });
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start gap-2 p-24">
       <div>
-        {console.log(data)}
-        {loading ? <p>Fetching data...</p> : null}
+        {status === "loading" ? <p>Fetching data...</p> : ""}
 
-        {error ? <p>Error ...</p> : null}
-        {data !== null ? JSON.stringify(data.count) + " games" : ""}
+        {status === "error" ? <p>Error ...</p> : ""}
+        {status === "success" ? JSON.stringify(data.count) + " games" : ""}
       </div>
-      <RandomButton />
-      <Accordion />
+      {/* <RandomButton />
+      <Accordion /> */}
     </main>
   );
 }
