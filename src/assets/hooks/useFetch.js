@@ -45,14 +45,15 @@
 //   fetchRessources();
 // }
 
+import { RandomInt } from "../libs/UtilityFunctions";
+
 const API_KEY = process.env.NEXT_PUBLIC_RAWG_API_KEY;
 const RawgURLPreffix = "https://api.rawg.io/api";
 
-const fetchGeneral =
+export const fetchGeneral =
   (fetchURL, params = {}) =>
   async () => {
     const url = setQueryParams(fetchURL, params);
-    console.log(url);
     const res = await fetch(url);
     const data = res.json();
     return data;
@@ -69,3 +70,17 @@ const setQueryParams = (url, params = {}) => {
 };
 
 export const fetchGames = fetchGeneral("/games");
+
+export const fetchRandomGamePage = async () => {
+  const res = await fetchGames();
+  const pageCount = res.count;
+  const gamePerPage = res.results.length;
+  const randomPageID = RandomInt(0, Math.ceil(pageCount / gamePerPage));
+  const pageData = await fetchGeneral("/games", { page: randomPageID })();
+  const gameCount = pageData.results.length;
+  const randomGameID = RandomInt(0, gameCount - 1);
+  const gameID = pageData.results[randomGameID].id;
+  const gameURL = `/games/${gameID}`;
+
+  return gameURL;
+};

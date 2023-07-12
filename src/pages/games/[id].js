@@ -1,39 +1,50 @@
 import { useRouter } from "next/router";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import { useFetchGameByID } from "@/assets/hooks/useFetch";
 import { getDateFormat } from "@/assets/libs/UtilityFunctions";
+import { fetchGeneral } from "@/assets/hooks/useFetch";
+import { useEffect } from "react";
 
 export default function GameID() {
   const { asPath } = useRouter();
 
   const currentURL = asPath.split("/").slice(-1)[0].replaceAll("%20", " ");
-  const { data, loading, error } = useFetchGameByID(currentURL);
+  const URL = "/games/" + currentURL;
+
+  const { data, status, refetch, isRefetching } = useQuery(
+    ["gamePage"],
+    fetchGeneral(URL)
+  );
+
+  useEffect(() => {
+    console.log(currentURL);
+    refetch();
+  }, [refetch, data, currentURL]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start gap-8 p-24">
-      {loading || data === null ? <p>Fetching data...</p> : null}
+      {status === "loading" || data === null || isRefetching ? (
+        <p>Fetching data...</p>
+      ) : null}
 
-      {error ? <p>Error ...</p> : null}
+      {status === "error" ? <p>Error ...</p> : null}
 
-      {data ? (
+      {status === "success" &&
+      data &&
+      data?.detail !== ("Not found." || undefined) ? (
         <div key={data.id} className="flex flex-col text-center gap-2">
+          {console.log(data)}
           <div className="font-bold text-lg">{data.name}</div>
           <div>
-            {data.developers !== null ? (
+            {data.developers !== (null || undefined) ? (
               <p>
-                {data.developers !== null ? (
-                  <p>
-                    {" "}
-                    Developped by
-                    {data.developers.map((developer, index) => {
-                      let name = " " + developer.name;
-                      if (index + 1 < data.developers.length) name += ",";
-                      return name;
-                    })}
-                  </p>
-                ) : (
-                  ""
-                )}
+                {" "}
+                Developped by
+                {data.developers.map((developer, index) => {
+                  let name = " " + developer.name;
+                  if (index + 1 < data.developers.length) name += ",";
+                  return name;
+                })}
               </p>
             ) : (
               ""
