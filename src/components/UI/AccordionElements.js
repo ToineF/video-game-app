@@ -16,11 +16,10 @@ export default function AccordionElements({
           const newUnusedTags = unusedTags;
           newUnusedTags.splice(indexOfValue, 1);
           setUnusedTags(() => [...newUnusedTags]);
-
-          const newSlugTags = [...currentTags, value].map((tag) => {
-            return String(tag).toLowerCase().replaceAll(" ", "-");
-          });
-          sessionStorage.setItem("UsedTags", JSON.stringify(newSlugTags));
+          sessionStorage.setItem(
+            "UsedTags",
+            JSON.stringify([...currentTags, value])
+          );
         }
       }}
     >

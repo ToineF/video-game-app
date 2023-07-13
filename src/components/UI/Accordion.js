@@ -16,7 +16,10 @@ export default function Accordion() {
     "Horror",
     "RPG",
   ]);
-  const [currentTags, setCurrentTags] = useState([]);
+  const [currentTags, setCurrentTags] = useState(
+    []
+    //JSON.parse(sessionStorage.getItem("UsedTags")) || []
+  );
 
   useEffect(() => {
     if (status === "success") {

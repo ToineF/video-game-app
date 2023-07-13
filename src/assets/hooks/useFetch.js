@@ -20,7 +20,10 @@ function getSessionStorageQueryParams() {
     const tags = sessionStorage.getItem("UsedTags");
     if (tags !== null && tags !== undefined) {
       const tagsArray = JSON.parse(tags);
-      const tagsString = tagsArray.join(",");
+      const newSlugTags = tagsArray.map((tag) => {
+        return String(tag).toLowerCase().replaceAll(" ", "-");
+      });
+      const tagsString = newSlugTags.join(",");
       const tagsObject = { tags: tagsString };
       return tagsObject;
     }
