@@ -17,12 +17,18 @@ export default function RandomButton({ text = "Random Game" }) {
         if (status !== "success" || isRefetching) return;
         router.push(data);
         refetch();
-        console.log(data);
       }}
     >
       <p>{text}</p>
-      {status !== "success" || isRefetching ? (
+      {status === "loading" || isRefetching ? (
         <div className="loader"></div>
+      ) : (
+        ""
+      )}
+      {status === "error" ? (
+        <div className="errorCircle">
+          <div className="errorLine"></div>
+        </div>
       ) : (
         ""
       )}

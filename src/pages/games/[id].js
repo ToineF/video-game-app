@@ -10,14 +10,12 @@ export default function GameID() {
 
   const currentURL = asPath.split("/").slice(-1)[0].replaceAll("%20", " ");
   const URL = "/games/" + currentURL;
-
   const { data, status, refetch, isRefetching } = useQuery(
     ["gamePage"],
     fetchGeneral(URL)
   );
 
   useEffect(() => {
-    console.log(currentURL);
     refetch();
   }, [refetch, data, currentURL]);
 
@@ -27,13 +25,12 @@ export default function GameID() {
         <p>Fetching data...</p>
       ) : null}
 
-      {status === "error" ? <p>Error ...</p> : null}
+      {status === "error" ? <p>Error...</p> : null}
 
       {status === "success" &&
       data &&
       data?.detail !== ("Not found." || undefined) ? (
         <div key={data.id} className="flex flex-col text-center gap-2">
-          {console.log(data)}
           <div className="font-bold text-lg">{data.name}</div>
           <div>
             {data.developers !== (null || undefined) ? (

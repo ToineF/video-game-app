@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
-import { useFetchTags } from "@/assets/hooks/useFetch";
+import { fetchTags } from "@/assets/hooks/useFetch";
 import AccordionElements from "./AccordionElements";
 import Image from "next/image";
 import TagBox from "./TagBox";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Accordion() {
-  const {
-    data: tagsData,
-    loading: tagsLoading,
-    error: tagsError,
-  } = useFetchTags();
+  const { status, data } = useQuery(["tags"], fetchTags);
   const [isHidden, setIsHidden] = useState(true);
   const [unusedTags, setUnusedTags] = useState([
     "Action",
@@ -20,23 +17,21 @@ export default function Accordion() {
     "RPG",
   ]);
   const [currentTags, setCurrentTags] = useState([]);
+
   useEffect(() => {
-    if (!tagsLoading) {
-      const results = tagsData?.results;
+    if (status === "success") {
+      const results = data?.results;
       if (!results) return;
-      setUnusedTags(
-        results.map((tag) => {
-          return tag.name;
-        })
-      );
+      const tagNames = results.map((tag) => {
+        return tag.name;
+      });
+      setUnusedTags(tagNames);
     }
-  }, [tagsLoading]);
+  }, [status, data?.results]);
 
   return (
     <>
-      {tagsError && "Error"}
-      {tagsLoading && "Loading"}
-      {!tagsLoading && (
+      {status === "success" && (
         <>
           <div className="flex flex-col">
             <button
@@ -78,7 +73,7 @@ export default function Accordion() {
               </>
             ) : (
               ""
-            )}{" "}
+            )}
           </div>
           <div className="text-center p-2">
             <p className="p-2"> Current Tags:</p>

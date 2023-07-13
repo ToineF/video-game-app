@@ -16,8 +16,12 @@ export default function AccordionElements({
           const newUnusedTags = unusedTags;
           newUnusedTags.splice(indexOfValue, 1);
           setUnusedTags(() => [...newUnusedTags]);
+
+          const newSlugTags = [...currentTags, value].map((tag) => {
+            return String(tag).toLowerCase().replaceAll(" ", "-");
+          });
+          sessionStorage.setItem("UsedTags", JSON.stringify(newSlugTags));
         }
-        console.log(unusedTags);
       }}
     >
       <div className="bg-gray-100 p-2 text-gray-600 text-center hover:bg-gray-200">

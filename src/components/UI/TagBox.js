@@ -20,6 +20,10 @@ export default function TagBox({
             const newCurrentTags = currentTags;
             newCurrentTags.splice(indexOfValue, 1);
             setCurrentTags(() => [...newCurrentTags]);
+            const newSlugTags = newCurrentTags.map((tag) => {
+              return String(tag).toLowerCase().replace(" ", "-");
+            });
+            sessionStorage.setItem("UsedTags", JSON.stringify(newSlugTags));
           }
         }}
       >
