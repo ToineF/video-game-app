@@ -5,14 +5,18 @@ import RandomButton from "@/components/UI/RandomButton";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { data, status, refetch, isRefetching } = useQuery(
+  const { data, status, isRefetching, refetch } = useQuery(
     ["games"],
     fetchGames
   );
-
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
+  // useEffect(() => {
+  //   const reloadPage = () => {
+  //     refetch();
+  //     console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHH");
+  //   };
+  //   window.addEventListener("storage", reloadPage());
+  //   return () => window.removeEventListener("storage", reloadPage());
+  // }, [refetch]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start gap-2 p-24">

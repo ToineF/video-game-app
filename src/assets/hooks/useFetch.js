@@ -7,11 +7,19 @@ const setQueryParams = (url, params = {}) => {
   let queryParamsString = `?key=${API_KEY}`;
   const paramKeys = Object.keys(params);
   const paramValues = Object.values(params);
-  console.log(params);
+  //console.log(params);
   for (let i = 0; i < paramKeys.length; i++) {
     queryParamsString += `&${paramKeys[i]}=${paramValues[i]}`;
   }
-  console.log(RawgURLPreffix + url + queryParamsString);
+  const sessionStorageObject = getSessionStorageQueryParams();
+  if (sessionStorageObject !== (null || undefined)) {
+    const storageKey = Object.keys(sessionStorageObject)[0];
+    const storageValue = Object.values(sessionStorageObject)[0];
+    if (storageValue !== "") {
+      queryParamsString += `&${storageKey}=${storageValue}`;
+    }
+  }
+  //console.log(RawgURLPreffix + url + queryParamsString);
   return RawgURLPreffix + url + queryParamsString;
 };
 
@@ -24,6 +32,7 @@ function getSessionStorageQueryParams() {
         return String(tag).toLowerCase().replaceAll(" ", "-");
       });
       const tagsString = newSlugTags.join(",");
+      if (tagsString === "") return {};
       const tagsObject = { tags: tagsString };
       return tagsObject;
     }
@@ -34,7 +43,7 @@ function getSessionStorageQueryParams() {
 export const fetchGeneral =
   (fetchURL, params = {}) =>
   async () => {
-    console.log(params);
+    //console.log(params);
     try {
       const url = setQueryParams(fetchURL, params);
       const res = await fetch(url);
@@ -45,12 +54,9 @@ export const fetchGeneral =
     }
   };
 
-export const fetchGames = fetchGeneral(
-  "/games",
-  getSessionStorageQueryParams()
-);
+export const fetchGames = fetchGeneral("/games");
 
-export const fetchTags = fetchGeneral("/tags", { page: 3 });
+export const fetchTags = fetchGeneral("/tags", { page: 1 });
 
 export const fetchRandomGamePage = async () => {
   try {

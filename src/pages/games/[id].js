@@ -33,9 +33,9 @@ export default function GameID() {
         <div key={data.id} className="flex flex-col text-center gap-2">
           <div className="font-bold text-lg">{data.name}</div>
           <div>
-            {data.developers !== (null || undefined) ? (
+            {data.developers !== (null || undefined) &&
+            data.developers.length > 0 ? (
               <p>
-                {" "}
                 Developped by
                 {data.developers.map((developer, index) => {
                   let name = " " + developer.name;
