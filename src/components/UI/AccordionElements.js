@@ -24,7 +24,7 @@ export default function AccordionElements({
         }
       }}
     >
-      <div className="bg-gray-100 p-2 text-gray-600 text-center hover:bg-gray-200">
+      <div className="p-2 text-center text-gray-600 dark:text-gray-200 bg-gray-100 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-500">
         <p>{value}</p>
       </div>
     </button>

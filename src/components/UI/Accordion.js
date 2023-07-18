@@ -52,8 +52,8 @@ export default function Accordion() {
           <div
             className={
               isHidden
-                ? "bg-gray-500 p-2 rounded text-gray-200 hover:bg-gray-600"
-                : "bg-gray-600 p-2 rounded text-gray-200"
+                ? "rounded p-2 text-gray-200 bg-gray-500 hover:bg-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
+                : "rounded p-2 text-gray-200 bg-gray-600 dark:bg-gray-600"
             }
           >
             <div className="flex gap-2 justify-center">
@@ -67,7 +67,7 @@ export default function Accordion() {
                 <input
                   type="text"
                   placeholder="Filter by Tag"
-                  className="text-gray-900 px-2 rounded-sm"
+                  className="px-2 rounded-sm text-gray-900 dark:text-gray-200 bg-gray-100 dark:bg-gray-500 dark:placeholder:text-gray-700"
                   value={inputValue}
                   onChange={(event) => {
                     setInputValue(event.currentTarget.value);

@@ -4,12 +4,16 @@ import Menubutton from "@/components/UI/MenuButton";
 export default function Layout({ children }) {
   return (
     <main>
-      <div className="flex flex-row justify-between p-5 bg-gray-300">
+      <div className="flex flex-row justify-between p-5 bg-gray-300 dark:bg-gray-900 fixed top-0 w-full">
         <Menubutton />
         <RandomButton />
       </div>
-      <div>{children}</div>
-      <footer className="flex justify-center p-5">Data from RAWG.io API</footer>
+      <div className="flex flex-col mt-16">
+        <div>{children}</div>
+        <footer className="flex justify-center p-5">
+          Data from RAWG.io API
+        </footer>
+      </div>
     </main>
   );
 }

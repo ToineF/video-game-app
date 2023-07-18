@@ -9,7 +9,7 @@ export default function TagBox({
   setUnusedTags,
 }) {
   return (
-    <div className="flex justify-between p-2 gap-2 bg-gray-500 rounded">
+    <div className="flex justify-between p-2 gap-2 bg-gray-500 dark:bg-gray-800 rounded">
       <p> {value}</p>
       <button
         onClick={() => {
@@ -24,7 +24,6 @@ export default function TagBox({
               "UsedTags",
               JSON.stringify([...newCurrentTags])
             );
-
             window.dispatchEvent(new Event("removeTag"));
           }
         }}
