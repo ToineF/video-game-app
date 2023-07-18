@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { fetchRandomGamePage } from "@/assets/hooks/useFetch";
 
 export default function RandomButton({ text = "Random Game" }) {
@@ -9,6 +10,19 @@ export default function RandomButton({ text = "Random Game" }) {
     ["game"],
     fetchRandomGamePage
   );
+
+  useEffect(() => {
+    window.addEventListener("addTag", refetch);
+    return () => {
+      window.removeEventListener("addTag", refetch);
+    };
+  }, []);
+  useEffect(() => {
+    window.addEventListener("removeTag", refetch);
+    return () => {
+      window.removeEventListener("removeTag", refetch);
+    };
+  }, []);
 
   return (
     <button

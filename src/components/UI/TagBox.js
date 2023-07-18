@@ -24,6 +24,8 @@ export default function TagBox({
               "UsedTags",
               JSON.stringify([...newCurrentTags])
             );
+
+            window.dispatchEvent(new Event("removeTag"));
           }
         }}
       >

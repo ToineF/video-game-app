@@ -20,6 +20,7 @@ export default function AccordionElements({
             "UsedTags",
             JSON.stringify([...currentTags, value])
           );
+          window.dispatchEvent(new Event("addTag"));
         }
       }}
     >
