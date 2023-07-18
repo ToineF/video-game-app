@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
-import { fetchRandomGamePage, fetchGames } from "@/assets/hooks/useFetch";
+import { fetchRandomGamePage } from "@/assets/hooks/useFetch";
 
 export default function RandomButton({ text = "Random Game" }) {
   const router = useRouter();

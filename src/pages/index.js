@@ -10,12 +10,17 @@ export default function Home() {
     fetchGames
   );
   // useEffect(() => {
-  //   const reloadPage = () => {
-  //     refetch();
-  //     console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHH");
-  //   };
-  //   window.addEventListener("storage", reloadPage());
-  //   return () => window.removeEventListener("storage", reloadPage());
+  //   if (typeof window !== "undefined") {
+  //     window.addEventListener("addTag", () => {
+  //       refetch();
+  //       console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHH");
+  //     });
+  //     return () =>
+  //       window.removeEventListener("storage", () => {
+  //         refetch();
+  //         console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHH");
+  //       });
+  //   }
   // }, [refetch]);
 
   return (

@@ -2,6 +2,14 @@ import { RandomInt } from "../libs/UtilityFunctions";
 
 const API_KEY = process.env.NEXT_PUBLIC_RAWG_API_KEY;
 const RawgURLPreffix = "https://api.rawg.io/api";
+const tagLimit = 10000;
+
+const hasTag = () => {
+  const tags = getSessionStorageQueryParams();
+  if (tags === {}) return false;
+  console.log(tags, Object.keys(tags).length > 0);
+  return Object.keys(tags).length > 0;
+};
 
 const setQueryParams = (url, params = {}) => {
   let queryParamsString = `?key=${API_KEY}`;
@@ -61,7 +69,9 @@ export const fetchTags = fetchGeneral("/tags", { page: 1 });
 export const fetchRandomGamePage = async () => {
   try {
     const res = await fetchGames();
-    const pageCount = res.count;
+    let pageCount = res.count;
+    console.log(hasTag());
+    if (hasTag()) pageCount = Math.min(pageCount, tagLimit);
     const gamePerPage = res.results.length;
     if (pageCount === 0 && gamePerPage === 0) return "/";
     const randomPageID = RandomInt(0, Math.ceil(pageCount / gamePerPage));
