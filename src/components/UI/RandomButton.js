@@ -26,7 +26,7 @@ export default function RandomButton({ text = "Random Game" }) {
 
   return (
     <button
-      className="flex rounded p-3 gap-2 bg-gray-500 hover:bg-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-200"
+      className="flex rounded-md p-3 gap-2 bg-blue-500 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-700 text-gray-200 font-semibold"
       onClick={() => {
         if (status !== "success" || isRefetching) return;
         router.push(data);

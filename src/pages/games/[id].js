@@ -31,7 +31,7 @@ export default function GameID() {
       data &&
       data?.detail !== ("Not found." || undefined) ? (
         <div key={data.id} className="flex flex-col text-center gap-2">
-          <div className="font-bold text-lg">{data.name}</div>
+          <div className="font-bold text-3xl">{data.name}</div>
           <div>
             {data.developers !== (null || undefined) &&
             data.developers.length > 0 ? (

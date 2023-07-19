@@ -30,7 +30,7 @@ export default function Accordion() {
     const tagNames = tagsData();
     //
     const sessionTags = JSON.parse(sessionStorage.getItem("UsedTags"));
-    setCurrentTags(sessionTags || []);
+    setCurrentTags(sessionTags ?? []);
     setUnusedTags(
       tagNames.filter((tag) => {
         if (sessionTags !== null && sessionTags !== undefined) {
@@ -52,8 +52,8 @@ export default function Accordion() {
           <div
             className={
               isHidden
-                ? "rounded p-2 text-gray-200 bg-gray-500 hover:bg-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
-                : "rounded p-2 text-gray-200 bg-gray-600 dark:bg-gray-600"
+                ? "rounded p-2 text-gray-200 bg-gray-500 dark:bg-gray-700"
+                : "rounded p-2 text-gray-200 bg-gray-500 dark:bg-gray-700"
             }
           >
             <div className="flex gap-2 justify-center">
@@ -61,7 +61,6 @@ export default function Accordion() {
               <button
                 onClick={() => {
                   setIsHidden(false);
-                  console.log("B");
                 }}
               >
                 <input
@@ -77,7 +76,6 @@ export default function Accordion() {
               <button
                 onClick={() => {
                   setIsHidden(!isHidden);
-                  console.log("A");
                 }}
               >
                 <Image
@@ -93,6 +91,7 @@ export default function Accordion() {
           {!isHidden ? (
             <div className="flex flex-col overflow-y-auto max-h-64">
               {unusedTags
+                .sort((a, b) => a > b)
                 .filter((tag) => {
                   return tag.toLowerCase().includes(inputValue.toLowerCase());
                 })

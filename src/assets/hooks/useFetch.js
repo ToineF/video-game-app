@@ -13,18 +13,25 @@ const hasTag = () => {
 
 const setQueryParams = (url, params = {}) => {
   let queryParamsString = `?key=${API_KEY}`;
-  const paramKeys = Object.keys(params);
-  const paramValues = Object.values(params);
-  //console.log(params);
-  for (let i = 0; i < paramKeys.length; i++) {
-    queryParamsString += `&${paramKeys[i]}=${paramValues[i]}`;
-  }
-  const sessionStorageObject = getSessionStorageQueryParams();
-  if (sessionStorageObject !== (null || undefined)) {
-    const storageKey = Object.keys(sessionStorageObject)[0];
-    const storageValue = Object.values(sessionStorageObject)[0];
-    if (storageValue !== "") {
-      queryParamsString += `&${storageKey}=${storageValue}`;
+  if (params !== {}) {
+    const paramKeys = Object.keys(params);
+    const paramValues = Object.values(params);
+    console.log(params);
+    for (let i = 0; i < paramKeys.length; i++) {
+      queryParamsString += `&${paramKeys[i]}=${paramValues[i]}`;
+    }
+    const sessionStorageObject = getSessionStorageQueryParams();
+    if (sessionStorageObject !== (null || undefined)) {
+      const storageKey = Object.keys(sessionStorageObject)[0];
+      const storageValue = Object.values(sessionStorageObject)[0];
+      console.log(`&${storageKey}=${storageValue}`);
+      if (
+        storageValue !== "" &&
+        storageValue !== null &&
+        storageValue !== undefined
+      ) {
+        queryParamsString += `&${storageKey}=${storageValue}`;
+      }
     }
   }
   //console.log(RawgURLPreffix + url + queryParamsString);
@@ -70,7 +77,6 @@ export const fetchRandomGamePage = async () => {
   try {
     const res = await fetchGames();
     let pageCount = res.count;
-    console.log(hasTag());
     if (hasTag()) pageCount = Math.min(pageCount, tagLimit);
     const gamePerPage = res.results.length;
     if (pageCount === 0 && gamePerPage === 0) return "/";
