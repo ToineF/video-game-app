@@ -21,15 +21,17 @@ const setQueryParams = (url, params = {}) => {
     }
     const sessionStorageObject = getSessionStorageQueryParams();
     if (sessionStorageObject !== (null || undefined)) {
-      const storageKey = Object.keys(sessionStorageObject)[0];
-      const storageValue = Object.values(sessionStorageObject)[0];
-      //console.log(`&${storageKey}=${storageValue}`);
-      if (
-        storageValue !== "" &&
-        storageValue !== null &&
-        storageValue !== undefined
-      ) {
-        queryParamsString += `&${storageKey}=${storageValue}`;
+      const storageKeys = Object.keys(sessionStorageObject);
+      const storageValues = Object.values(sessionStorageObject);
+      for (let i = 0; i < storageKeys.length; i++) {
+        if (
+          storageValues[i] !== "" &&
+          storageValues[i] !== null &&
+          storageValues[i] !== undefined
+        ) {
+          //console.log(`&${storageKeys[i]}=${storageValues[i]}`);
+          queryParamsString += `&${storageKeys[i]}=${storageValues[i]}`;
+        }
       }
     }
   }
@@ -38,7 +40,18 @@ const setQueryParams = (url, params = {}) => {
 };
 
 function getSessionStorageQueryParams() {
+  let queryParamsObject = {};
   if (typeof window !== "undefined") {
+    // NAME
+    const name = sessionStorage.getItem("NameFilter");
+    if (name != null && name != undefined) {
+      const nameString = JSON.parse(name);
+      if (nameString !== "") {
+        queryParamsObject.search = nameString;
+        queryParamsObject.search_precise = true;
+      }
+    }
+    // TAGS
     const tags = sessionStorage.getItem("UsedTags");
     if (tags !== null && tags !== undefined) {
       const tagsArray = JSON.parse(tags);
@@ -46,12 +59,13 @@ function getSessionStorageQueryParams() {
         return String(tag).toLowerCase().replaceAll(" ", "-");
       });
       const tagsString = newSlugTags.join(",");
-      if (tagsString === "") return {};
-      const tagsObject = { tags: tagsString };
-      return tagsObject;
+      if (tagsString !== "") {
+        queryParamsObject.tags = tagsString;
+      }
     }
   }
-  return {};
+  //console.log(queryParamsObject);
+  return queryParamsObject;
 }
 
 export const fetchGeneral =
@@ -75,6 +89,7 @@ export const fetchTags = fetchGeneral("/tags", { page: 1 });
 export const fetchRandomGamePage = async () => {
   try {
     const res = await fetchGames();
+    console.log(res);
     let pageCount = res.count;
     if (hasTag()) pageCount = Math.min(pageCount, tagLimit);
     const gamePerPage = res.results.length;

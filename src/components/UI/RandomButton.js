@@ -3,7 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { fetchRandomGamePage } from "@/assets/hooks/useFetch";
 
-export default function RandomButton({ text = "Random Game", size = "text-md" }) {
+export default function RandomButton({
+  text = "Random Game",
+  size = "text-md",
+}) {
   const router = useRouter();
 
   const { status, data, refetch, isRefetching } = useQuery(
@@ -33,21 +36,19 @@ export default function RandomButton({ text = "Random Game", size = "text-md" })
         refetch();
       }}
     >
-
-        <p className={size}>{text}</p>
-        {status === "loading" || isRefetching ? (
-          <div className="loader"></div>
-        ) : (
-          ""
-        )}
-        {status === "error" ? (
-          <div className="errorCircle">
-            <div className="errorLine"></div>
-          </div>
-        ) : (
-          ""
-        )}
-      
+      <p className={size}>{text}</p>
+      {status === "loading" || isRefetching ? (
+        <div className="loader"></div>
+      ) : (
+        ""
+      )}
+      {status === "error" ? (
+        <div className="errorCircle">
+          <div className="errorLine"></div>
+        </div>
+      ) : (
+        ""
+      )}
     </button>
   );
 }
