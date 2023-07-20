@@ -66,7 +66,7 @@ export default function Accordion() {
                 <input
                   type="text"
                   placeholder="Filter by Tag"
-                  className="px-2 rounded-sm text-gray-900 dark:text-gray-200 bg-gray-100 dark:bg-gray-500 dark:placeholder:text-gray-700"
+                  className="px-2 rounded-sm text-gray-900 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 dark:placeholder:text-gray-500"
                   value={inputValue}
                   onChange={(event) => {
                     setInputValue(event.currentTarget.value);

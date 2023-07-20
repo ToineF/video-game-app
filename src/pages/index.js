@@ -25,14 +25,17 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start gap-2 p-24">
+      <div className="text-4xl font-bold">Want a Random Game?</div>
+     <div  className="flex flex-col p-8 gap-2">
       <div>
-        {status === "loading" || isRefetching ? <p>Fetching data...</p> : ""}
-        {status === "error" ? <p>Error...</p> : ""}
-        {status === "success" && !isRefetching
-          ? JSON.stringify(data.count) + " games"
-          : ""}
+          {status === "loading" || isRefetching ? <p>Fetching data...</p> : ""}
+          {status === "error" ? <p>Error...</p> : ""}
+          {status === "success" && !isRefetching
+            ? "from " + JSON.stringify(data.count) + " games"
+            : ""}
+        </div>
+        <RandomButton size="text-3xl p-2"/>
       </div>
-      <RandomButton />
       <Accordion />
     </main>
   );

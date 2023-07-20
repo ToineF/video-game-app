@@ -7,7 +7,6 @@ const tagLimit = 10000;
 const hasTag = () => {
   const tags = getSessionStorageQueryParams();
   if (tags === {}) return false;
-  console.log(tags, Object.keys(tags).length > 0);
   return Object.keys(tags).length > 0;
 };
 
@@ -16,7 +15,7 @@ const setQueryParams = (url, params = {}) => {
   if (params !== {}) {
     const paramKeys = Object.keys(params);
     const paramValues = Object.values(params);
-    console.log(params);
+    //console.log(params);
     for (let i = 0; i < paramKeys.length; i++) {
       queryParamsString += `&${paramKeys[i]}=${paramValues[i]}`;
     }
@@ -24,7 +23,7 @@ const setQueryParams = (url, params = {}) => {
     if (sessionStorageObject !== (null || undefined)) {
       const storageKey = Object.keys(sessionStorageObject)[0];
       const storageValue = Object.values(sessionStorageObject)[0];
-      console.log(`&${storageKey}=${storageValue}`);
+      //console.log(`&${storageKey}=${storageValue}`);
       if (
         storageValue !== "" &&
         storageValue !== null &&

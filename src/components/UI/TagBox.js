@@ -9,7 +9,7 @@ export default function TagBox({
   setUnusedTags,
 }) {
   return (
-    <div className="flex justify-between p-2 gap-2 bg-gray-500 dark:bg-gray-800 rounded">
+    <div className="flex justify-between p-2 gap-2 bg-blue-400 dark:bg-blue-900 rounded">
       <p> {value}</p>
       <button
         onClick={() => {
@@ -29,10 +29,11 @@ export default function TagBox({
         }}
       >
         <Image
-          src="/../public/cross.png"
+          src="/../public/cross_white.png"
           alt="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png"
           height={10}
           width={25}
+          className="brightness-0 dark:brightness-100"
         />
       </button>
     </div>
