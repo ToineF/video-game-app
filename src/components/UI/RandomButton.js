@@ -26,6 +26,12 @@ export default function RandomButton({
       window.removeEventListener("removeTag", refetch);
     };
   }, []);
+  useEffect(() => {
+    window.addEventListener("modifyNameFilter", refetch);
+    return () => {
+      window.removeEventListener("modifyNameFilter", refetch);
+    };
+  }, []);
 
   return (
     <button

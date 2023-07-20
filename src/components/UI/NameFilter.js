@@ -16,7 +16,7 @@ export default function NameFilter() {
         {confirmedName === "" ? <p>No filter</p> : <p>| {confirmedName}</p>}
       </div>
       <form
-        className="flex px-4 py-2 gap-2 rounded bg-gray-500"
+        className="flex px-4 py-2 gap-2 rounded bg-gray-500 dark:bg-gray-700"
         onSubmit={(event) => {
           event.preventDefault();
           if (name === confirmedName) return;
@@ -26,14 +26,16 @@ export default function NameFilter() {
         }}
       >
         <input
-          className="rounded px-2"
+          className="rounded px-2 text-gray-900 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 dark:placeholder:text-gray-500"
           placeholder="Filter by Name"
           value={name}
           onChange={(event) => {
             setName(event.currentTarget.value);
           }}
         ></input>
-        <button>OK</button>
+        <button className="border-2 px-2 rounded bg-gray-500 hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-100">
+          OK
+        </button>
       </form>
     </div>
   );
