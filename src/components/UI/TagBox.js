@@ -9,7 +9,7 @@ export default function TagBox({
   setUnusedTags,
 }) {
   return (
-    <div className="flex justify-between p-2 gap-2 bg-blue-400 dark:bg-blue-900 rounded">
+    <div className="flex justify-between p-2 gap-2 bg-blue-400 dark:bg-blue-900 rounded ">
       <p> {value}</p>
       <button
         onClick={() => {

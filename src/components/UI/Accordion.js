@@ -48,6 +48,28 @@ export default function Accordion() {
     <>
       {/* {status === "success" &&  */}
       <>
+        <div className="text-center p-2">
+          <p className="p-2 text-lg font-bold"> Current Tags:</p>
+          {currentTags.length > 0 ? (
+            <div className="flex gap-2 flex-wrap justify-center">
+              {currentTags.map((tag) => {
+                return (
+                  <TagBox
+                    key={tag}
+                    value={tag}
+                    setIsHidden={setIsHidden}
+                    currentTags={currentTags}
+                    setCurrentTags={setCurrentTags}
+                    unusedTags={unusedTags}
+                    setUnusedTags={setUnusedTags}
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <div>No tags</div>
+          )}
+        </div>
         <div className="flex flex-col">
           <div
             className={
@@ -111,28 +133,6 @@ export default function Accordion() {
             </div>
           ) : (
             ""
-          )}
-        </div>
-        <div className="text-center p-2">
-          <p className="p-2"> Current Tags:</p>
-          {currentTags.length > 0 ? (
-            <div className="flex flex-col gap-2">
-              {currentTags.map((tag) => {
-                return (
-                  <TagBox
-                    key={tag}
-                    value={tag}
-                    setIsHidden={setIsHidden}
-                    currentTags={currentTags}
-                    setCurrentTags={setCurrentTags}
-                    unusedTags={unusedTags}
-                    setUnusedTags={setUnusedTags}
-                  />
-                );
-              })}
-            </div>
-          ) : (
-            <div>No tags</div>
           )}
         </div>
       </>

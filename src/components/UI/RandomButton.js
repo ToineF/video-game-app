@@ -19,19 +19,19 @@ export default function RandomButton({
     return () => {
       window.removeEventListener("addTag", refetch);
     };
-  }, []);
+  }, [refetch]);
   useEffect(() => {
     window.addEventListener("removeTag", refetch);
     return () => {
       window.removeEventListener("removeTag", refetch);
     };
-  }, []);
+  }, [refetch]);
   useEffect(() => {
     window.addEventListener("modifyNameFilter", refetch);
     return () => {
       window.removeEventListener("modifyNameFilter", refetch);
     };
-  }, []);
+  }, [refetch]);
 
   return (
     <button

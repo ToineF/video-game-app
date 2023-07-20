@@ -16,19 +16,19 @@ export default function Home() {
     return () => {
       window.removeEventListener("addTag", refetch);
     };
-  }, []);
+  }, [refetch]);
   useEffect(() => {
     window.addEventListener("removeTag", refetch);
     return () => {
       window.removeEventListener("removeTag", refetch);
     };
-  }, []);
+  }, [refetch]);
   useEffect(() => {
     window.addEventListener("modifyNameFilter", refetch);
     return () => {
       window.removeEventListener("modifyNameFilter", refetch);
     };
-  }, []);
+  }, [refetch]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start gap-2 p-24">

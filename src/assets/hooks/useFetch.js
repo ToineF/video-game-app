@@ -49,6 +49,7 @@ function getSessionStorageQueryParams() {
       if (nameString !== "") {
         queryParamsObject.search = nameString;
         queryParamsObject.search_precise = true;
+        queryParamsObject.search_exact = true;
       }
     }
     // TAGS

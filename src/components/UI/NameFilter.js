@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function NameFilter() {
   const [name, setName] = useState("");
@@ -9,20 +10,45 @@ export default function NameFilter() {
     setConfirmedName(sessionName ?? "");
   }, []);
 
+  function UpdateSessionStorageName(value) {
+    setConfirmedName(value);
+    sessionStorage.setItem("NameFilter", JSON.stringify(value));
+    window.dispatchEvent(new Event("modifyNameFilter"));
+  }
+
   return (
     <div className="flex flex-col gap-4 pb-10">
       <div>
         <p className="text-lg font-bold">Current Name Filter:</p>
-        {confirmedName === "" ? <p>No filter</p> : <p>| {confirmedName}</p>}
+        {confirmedName === "" ? (
+          <p>No filter</p>
+        ) : (
+          <div className="flex gap-2">
+            <p>
+              <b>|</b> {confirmedName}
+            </p>
+            <button
+              onClick={() => {
+                UpdateSessionStorageName("");
+              }}
+            >
+              <Image
+                src="/../public/cross_white.png"
+                alt="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png"
+                height={10}
+                width={25}
+                className="brightness-0 dark:brightness-100"
+              />
+            </button>
+          </div>
+        )}
       </div>
       <form
         className="flex px-4 py-2 gap-2 rounded bg-gray-500 dark:bg-gray-700"
         onSubmit={(event) => {
           event.preventDefault();
           if (name === confirmedName) return;
-          setConfirmedName(name);
-          sessionStorage.setItem("NameFilter", JSON.stringify(name));
-          window.dispatchEvent(new Event("modifyNameFilter"));
+          UpdateSessionStorageName(name);
         }}
       >
         <input
