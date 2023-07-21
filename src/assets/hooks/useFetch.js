@@ -72,7 +72,7 @@ function getSessionStorageQueryParams() {
 export const fetchGeneral =
   (fetchURL, params = {}) =>
   async () => {
-    console.log(params);
+    //console.log(params);
     try {
       const url = setQueryParams(fetchURL, params);
       const res = await fetch(url);
@@ -90,7 +90,7 @@ export const fetchTags = fetchGeneral("/tags", { page: 1 });
 export const fetchRandomGamePage = async () => {
   try {
     const res = await fetchGames();
-    console.log(res);
+    //console.log(res);
     let gamesTotalCount = res.count;
     if (hasTag()) gamesTotalCount = Math.min(gamesTotalCount, tagLimit);
     const gamePerPage = res.results.length;

@@ -1,5 +1,5 @@
 export function RandomInt(min, max) {
-  console.log(min, max, Math.floor(min + Math.random() * (max - min)));
+  //console.log(min, max, Math.floor(min + Math.random() * (max - min)));
   return Math.floor(min + Math.random() * (max - min));
 }
 
