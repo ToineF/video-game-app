@@ -8,6 +8,7 @@ import { useEffect } from "react";
 export default function GameID() {
   const { asPath } = useRouter();
 
+  // FETCH PAGE
   const currentURL = asPath.split("/").slice(-1)[0].replaceAll("%20", " ");
   const URL = "/games/" + currentURL;
   const { data, status, refetch, isRefetching } = useQuery(
@@ -18,6 +19,19 @@ export default function GameID() {
   useEffect(() => {
     refetch();
   }, [refetch, data, currentURL]);
+
+  // FETCH SCREENSHOTS
+  const ScreenshotsURL = URL + "/screenshots";
+  const {
+    data: screenshotsData,
+    status: screenshotsStatus,
+    refetch: screenshotsRefetch,
+    isRefetching: screenshotsIsRefetching,
+  } = useQuery(["gameScreenshots"], fetchGeneral(ScreenshotsURL));
+
+  useEffect(() => {
+    screenshotsRefetch();
+  }, [screenshotsRefetch, screenshotsData, currentURL]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start gap-8 p-24">
@@ -68,6 +82,29 @@ export default function GameID() {
             )}
           </div>
           <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
+          <div>
+            {screenshotsStatus === "error" ? "Screenshots failed to load" : ""}
+            {screenshotsStatus === "loading" ||
+            screenshotsIsRefetching ||
+            screenshotsData === null
+              ? "Screenshots loading..."
+              : ""}
+            {screenshotsStatus === "success" && screenshotsData
+              ? screenshotsData.count > 0
+                ? screenshotsData.results.map((screenshot, index) => {
+                    return (
+                      <Image
+                        key={index}
+                        src={screenshot.image}
+                        alt={`Screenshot ${index} from the game`}
+                        width={screenshot.width}
+                        height={screenshot.height}
+                      ></Image>
+                    );
+                  })
+                : ""
+              : ""}
+          </div>
         </div>
       ) : null}
     </div>
