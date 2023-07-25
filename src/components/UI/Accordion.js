@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { fetchTags } from "@/assets/hooks/useFetch";
 import tagsData from "@/assets/libs/tagsData";
 import AccordionElements from "./AccordionElements";
 import Image from "next/image";
 import TagBox from "./TagBox";
-import { useQuery } from "@tanstack/react-query";
+//import { useQuery } from "@tanstack/react-query";
+//import { fetchTags } from "@/assets/hooks/useFetch";
 
 export default function Accordion() {
   // const { status, data } = useQuery(["tags"], fetchTags);
@@ -101,7 +101,7 @@ export default function Accordion() {
                 }}
               >
                 <Image
-                  src="/../public/arrowUp.png"
+                  src="/static/images/arrowUp.png"
                   alt="https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-up-01-512.png"
                   height={25}
                   width={25}
