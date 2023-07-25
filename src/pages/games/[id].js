@@ -45,7 +45,7 @@ export default function GameID() {
       data &&
       data?.detail !== ("Not found." || undefined) ? (
         <div key={data.id} className="flex flex-col sm:flex-row gap-8 w-full">
-          <div className="flex flex-col text-center gap-8 sm:w-2/3">
+          <div className="flex flex-col text-center gap-8 gaga">
             <div className="flex flex-col text-lg">
               <div className="font-bold text-3xl">{data.name}</div>
               <div>
@@ -74,7 +74,7 @@ export default function GameID() {
                   ""
                 )}
               </div>
-              {window.innerWidth <= 640 ? (
+              {/* {window.innerWidth <= 640 ? (
                 <div className="flex justify-center">
                   {data.background_image !== null ? (
                     <Image
@@ -85,33 +85,38 @@ export default function GameID() {
                     ></Image>
                   ) : null}
                 </div>
-              ) : null}
+              ) : null} */}
             </div>
             <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
           </div>
-          <div className="flex flex-col gap-2 sm:w-1/3">
-            {screenshotsStatus === "error" ? "Screenshots failed to load" : ""}
-            {screenshotsStatus === "loading" ||
-            screenshotsIsRefetching ||
-            screenshotsData === null
-              ? "Screenshots loading..."
-              : ""}
-            {screenshotsStatus === "success" && screenshotsData
-              ? screenshotsData.count > 0
-                ? screenshotsData.results.map((screenshot, index) => {
-                    return (
-                      <Image
-                        key={index}
-                        src={screenshot.image}
-                        alt={`Screenshot ${index} from the game`}
-                        width={1000}
-                        height={1000}
-                      ></Image>
-                    );
-                  })
-                : ""
-              : ""}
-          </div>
+
+          {screenshotsStatus === "error" ? "Screenshots failed to load" : ""}
+          {screenshotsStatus === "loading" ||
+          screenshotsIsRefetching ||
+          screenshotsData === null
+            ? "Screenshots loading..."
+            : ""}
+          {screenshotsStatus === "success" && screenshotsData ? (
+            screenshotsData.count > 0 && screenshotsData.results?.length > 0 ? (
+              <div className="flex flex-col gap-2 sm:w-1/3">
+                {screenshotsData.results.map((screenshot, index) => {
+                  return (
+                    <Image
+                      key={index}
+                      src={screenshot.image}
+                      alt={`Screenshot ${index} from the game`}
+                      width={1000}
+                      height={1000}
+                    ></Image>
+                  );
+                })}
+              </div>
+            ) : (
+              ""
+            )
+          ) : (
+            ""
+          )}
         </div>
       ) : null}
     </div>

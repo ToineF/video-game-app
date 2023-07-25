@@ -24,8 +24,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-    font-family: 'Trebuchet MS', sans-serif;
-
+  font-family: "Trebuchet MS", sans-serif;
 }
 
 .loader {
@@ -60,4 +59,17 @@ body {
 .errorLine {
   height: 3px;
   background: #ff2d2d;
+}
+
+.gaga {
+  /* border: 3px solid #00ff04; */
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .gaga {
+    /* border: 3px solid #ff2d2d; */
+    width: 66.66666666666%;
+    flex-grow: 1;
+  }
 }
