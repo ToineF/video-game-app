@@ -1,7 +1,6 @@
 import { RandomInt } from "../libs/UtilityFunctions";
 
-const API_KEY = process.env.NEXT_PUBLIC_RAWG_API_KEY;
-const RawgURLPreffix = "https://api.rawg.io/api";
+const RawgURLPreffix = "/api";
 const tagLimit = 10000;
 
 const hasTag = () => {
@@ -11,7 +10,7 @@ const hasTag = () => {
 };
 
 const setQueryParams = (url, params = {}) => {
-  let queryParamsString = `?key=${API_KEY}`;
+  let queryParamsString = "";
   if (params !== {}) {
     const paramKeys = Object.keys(params);
     const paramValues = Object.values(params);
@@ -34,6 +33,8 @@ const setQueryParams = (url, params = {}) => {
         }
       }
     }
+    queryParamsString = queryParamsString.replace("&", "?");
+    //console.log(queryParamsString);
   }
   //console.log(RawgURLPreffix + url + queryParamsString);
   return RawgURLPreffix + url + queryParamsString;
