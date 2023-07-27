@@ -33,7 +33,7 @@ export default function NameFilter() {
               }}
             >
               <Image
-                src="/../public/cross_white.png"
+                src="/static/images/cross_white.png"
                 alt="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png"
                 height={10}
                 width={25}
